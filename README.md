@@ -1,7 +1,7 @@
 
 # SortiFox
 
-This is a website that can store files and files into folder using PERN stack
+Sorti Fox is a web application that can store files and store files into as many different folders as a user wants as well as delete files and folders and download the files they saved and share it with others by email. They can also see the size of each file and folder and see the date created and the date updated of each file and folder
 
 ## Functionality 
 
@@ -11,7 +11,8 @@ The following **required** functionality is completed:
 * [ ] Once user is logged in they can upload a new file or create a new folder
 * [ ] Each folder they create can store a new folder or another file
 * [ ] The user can also edit and delete folders or files
-* [ ] Users can also download or share the file they uploaded 
+* [ ] Users can also download or share the file they uploaded
+* [ ] Users will be able to see the file size, date created, and date updated of each file or folder they create
 
 The following **extensions** are implemented:
 
@@ -38,8 +39,7 @@ Here's a walkthrough of implemented user stories:
 
 ## Notes
 
-I faced the challenge of storing files into cloudinary and retrieving the files to display it to the user. I also faced the challenge of figuring out a way that the user can download the file and 
-create a way for the user to send their files to others by email using jsdeliever. I also had trouble figuring out a way to have files and folders be set under another folder using prisma data model.
+I faced the challenge of storing files into cloudinary and retrieving the files to display it to the user when requested. I also faced the challenge of figuring out a way that the user can download the file and creating a way for the user to send their files to others by email using jsdeliever. I also had trouble figuring out a way to have files and folders be set under another folder using prisma data model.
 
 
 ## License
