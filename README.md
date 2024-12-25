@@ -1,7 +1,7 @@
 
 # SortiFox
 
-This is a website that can store files and files into folder using PERN stack
+Sorti Fox is a web application that can store files and store files into as many different folders as a user wants as well as delete files and folders and download the files they saved and share it with others by email
 
 ## Functionality 
 
