@@ -37,6 +37,12 @@ Here's a walkthrough of implemented user stories:
 
 <img src='walkthrough.gif' title='Video Walkthrough' width='60%' alt='Video Walkthrough' />
 
+
+## Image Walkthrough
+
+Home page layout
+<img width="1200" alt="Screenshot 2024-12-25 at 3 25 10 PM" src="https://github.com/user-attachments/assets/160b17a9-1a97-4c47-908f-f389f64c1571" />
+
 ## Notes
 
 I faced the challenge of storing files into cloudinary and retrieving the files to display it to the user when requested. I also faced the challenge of figuring out a way that the user can download the file and creating a way for the user to send their files to others by email using jsdeliever. I also had trouble figuring out a way to have files and folders be set under another folder using prisma data model.
