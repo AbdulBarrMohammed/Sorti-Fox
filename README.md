@@ -45,6 +45,8 @@ Home page layout:
 <img width="1000" alt="Screenshot 2024-12-25 at 3 25 10 PM" src="https://github.com/user-attachments/assets/160b17a9-1a97-4c47-908f-f389f64c1571" />
 
 
+
+
 Log in and sign up page:
 
 <img width="1439" alt="Screenshot 2024-12-25 at 12 06 11 PM" src="https://github.com/user-attachments/assets/861c753c-185d-4415-ba62-dd8fe167b406" />
@@ -53,13 +55,22 @@ Log in and sign up page:
 
 
 
+
+
 Files and Folders layout:
 
 <img width="1440" alt="Screenshot 2024-12-25 at 12 04 32 PM" src="https://github.com/user-attachments/assets/963f9b43-3fce-45aa-a7bf-8f84769afba5" />
 
+
+
+
+
 Creating new Folder:
 
 <img width="1439" alt="Screenshot 2024-12-25 at 12 04 51 PM" src="https://github.com/user-attachments/assets/d8447c02-b9cc-48e6-8fdb-68787a1ee98a" />
+
+
+
 
 
 Sharing file:
@@ -67,9 +78,16 @@ Sharing file:
 ![Screenshot 2024-12-25 at 12 07 38 PM](https://github.com/user-attachments/assets/4c9a0093-33fd-4408-8a63-010b8c4d8363)
 
 
+
+
+
 Navigating to folder created:
 
 <img width="1438" alt="Screenshot 2024-12-25 at 12 05 34 PM" src="https://github.com/user-attachments/assets/38a4ac4c-4348-4afa-9970-9f02d8642493" />
+
+
+
+
 
 Selected file:
 
