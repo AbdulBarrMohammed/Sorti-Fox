@@ -41,7 +41,7 @@ Here's a walkthrough of implemented user stories:
 ## Image Walkthrough
 
 Home page layout
-<img width="1200" alt="Screenshot 2024-12-25 at 3 25 10 PM" src="https://github.com/user-attachments/assets/160b17a9-1a97-4c47-908f-f389f64c1571" />
+<img width="1000" alt="Screenshot 2024-12-25 at 3 25 10 PM" src="https://github.com/user-attachments/assets/160b17a9-1a97-4c47-908f-f389f64c1571" />
 
 ## Notes
 
