@@ -1,7 +1,7 @@
 
 # SortiFox
 
-Sorti Fox is a web application that can store files and store files into as many different folders as a user wants as well as delete files and folders and download the files they saved and share it with others by email
+Sorti Fox is a web application that can store files and store files into as many different folders as a user wants as well as delete files and folders and download the files they saved and share it with others by email. They can also see the size of each file and folder and see the date created and the date updated of each file and folder
 
 ## Functionality 
 
@@ -11,7 +11,8 @@ The following **required** functionality is completed:
 * [ ] Once user is logged in they can upload a new file or create a new folder
 * [ ] Each folder they create can store a new folder or another file
 * [ ] The user can also edit and delete folders or files
-* [ ] Users can also download or share the file they uploaded 
+* [ ] Users can also download or share the file they uploaded
+* [ ] Users will be able to see the file size, date created, and date updated of each file or folder they create
 
 The following **extensions** are implemented:
 
