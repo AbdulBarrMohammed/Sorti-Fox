@@ -221,7 +221,7 @@
             const openNewFolderModalBtn = document.getElementById('open-modal');
             const newFolderModalCloseBtn = newFolderModal.querySelector('.close');
             const optionsModal = document.querySelector(`.optionsModal`);
-            //const deleteFolderModal = document.getElementById('deleteFolderModal');
+
 
             const newFileModal = document.getElementById('newFileModal');
             const openNewFileModalBtn = document.getElementById('open-file-modal');
@@ -236,7 +236,7 @@
                 newFolderModal.style.display = 'none';
             }
 
-            //open or close new file modal
+            //Open or close new file modal
             newFileModalCloseBtn.onclick = function() {
                 newFileModal.style.display = 'none';
             }
@@ -248,7 +248,7 @@
 
             document.querySelectorAll('.options-btn').forEach(button => {
                 const folderId = button.getAttribute('data-folder-id');
-                const optionsModal = document.getElementById(`optionsModal${folderId}`); // Corrected template literal
+                const optionsModal = document.getElementById(`optionsModal${folderId}`);
                 const optionsCloseBtn = optionsModal.querySelector('.close');
 
                 // Open the options modal when the button is clicked
@@ -256,7 +256,7 @@
                     optionsModal.style.display = 'block';
                 });
 
-                // Close the options modal when the 'X' is clicked
+                // Closes the options modal when the 'X' is clicked
                 optionsCloseBtn.onclick = function() {
                     optionsModal.style.display = 'none';
                 };
@@ -264,24 +264,25 @@
 
             });
 
-              // Handle options modal for each file
+              // Handles options modal for each file
             document.querySelectorAll('.options-file-btn').forEach(button => {
                 const fileId = button.getAttribute('data-file-id');
                 const optionsFileModal = document.getElementById(`optionsFileModal${fileId}`);
                 const optionsFileCloseBtn = optionsFileModal.querySelector('.close');
 
-                // Open the options modal when the button is clicked
+                // Opens the options modal when the button is clicked
                 button.addEventListener('click', () => {
                     optionsFileModal.style.display = 'block';
                 });
 
-                // Close the options modal when the 'X' is clicked
+                // Closes the options modal when the 'X' btn is clicked
                 optionsFileCloseBtn.onclick = function() {
                     optionsFileModal.style.display = 'none';
                 };
 
             });
 
+            //Opens edit modal and gets file id
             window.openEditFileModal = function(fileId) {
                 const optionsModel = document.getElementById(`optionsModal${fileId}`);
                 const modal = document.getElementById(`editFileModal${fileId}`);
@@ -297,7 +298,7 @@
             }
 
             window.openEditModal = function(folderId) {
-                //get options modal id
+                //Get options modal id
                 const optionsModal = document.getElementById(`optionsModal${folderId}`);
                 const modal = document.getElementById(`editFolderModal${folderId}`);
                 modal.style.display = 'block';
@@ -310,7 +311,7 @@
 
             }
 
-            // Close modals when clicking outside of them
+            // Closes modals when clicking outside of them
             window.onclick = function(event) {
                 if (event.target == newFolderModal) {
                     newFolderModal.style.display = "none";

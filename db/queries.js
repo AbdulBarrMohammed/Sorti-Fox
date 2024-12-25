@@ -6,7 +6,7 @@ async function insertNewUsers({ email, hashedPassword }) {
     return prisma.user.create({
       data: {
         email,
-        password: hashedPassword, // Ensure your Prisma schema uses "password" for this field
+        password: hashedPassword,
       },
     });
   }
@@ -68,7 +68,7 @@ async function getUser(email) {
 
   async function insertNewFolder({ email, folderName, createdAt, parentId = null }) {
     try {
-      // Find the user by email
+      // Finds the user by email
       const user = await prisma.user.findUnique({
         where: { email: email }
       });
@@ -77,22 +77,20 @@ async function getUser(email) {
         throw new Error('User not found');
       }
 
-      // Create a new folder linked to the user and possibly a parent folder
+      // Creates a new folder linked to the user and possibly a parent folder
       const newFolder = await prisma.folder.create({
         data: {
           name: folderName,
           createdAt: createdAt,
           author: {
-            connect: { id: user.id } // Link the folder to the user (author)
+            connect: { id: user.id } // Links the folder to the user (author)
           },
-          parent: parentId ? { connect: { id: parentId } } : undefined, // Optionally link to a parent folder
+          parent: parentId ? { connect: { id: parentId } } : undefined, // Optionally links to a parent folder
         }
       });
 
-      console.log('Folder created:', newFolder);
       return newFolder;
     } catch (error) {
-      console.error('Error inserting folder:', error);
       throw error;
     }
   }
@@ -115,10 +113,7 @@ async function getUser(email) {
 
   async function insertNewSubFolder({ subFolderName, createdAt, parentId, email }) {
     try {
-      // Debugging: Log input parameters
-      console.log('folderName:',subFolderName);
-      console.log('createdAt:', createdAt);
-      console.log('parentId:', parentId);
+
 
       const user = await prisma.user.findUnique({
         where: { email: email }
@@ -136,15 +131,13 @@ async function getUser(email) {
             connect: { id: parentId }
           },
           author: {
-            connect: { id: user.id } // Link the folder to the author (user who created it)
+            connect: { id: user.id }
           }
         }
       });
 
-      console.log('Successfully created new subfolder:', newSubFolder);
       return newSubFolder;
     } catch (error) {
-      console.error('Error inserting new subfolder:', error);
       throw new Error('Failed to create subfolder');
     }
   }
@@ -159,8 +152,6 @@ async function getUser(email) {
   }
 
   async function getAllSubFolders(parentId) {
-    // where parentid = parentid
-
 
    const folders = await prisma.folder.findMany({
      where: {
@@ -174,7 +165,7 @@ async function getUser(email) {
 
   async function insertNewFile({ originalname, size, path, createdAt, email }) {
     try {
-      // Find the user by email
+      // Finds the user by email
       const user = await prisma.user.findUnique({
         where: { email: email }
       });
@@ -183,7 +174,7 @@ async function getUser(email) {
         throw new Error('User not found');
       }
 
-      // Create a new folder linked to the user and possibly a parent folder
+      // Creates a new folder linked to the user and possibly a parent folder
       const newFile = await prisma.file.create({
         data: {
           name: originalname,
@@ -191,15 +182,13 @@ async function getUser(email) {
           path: path,
           blob: size,
           owner: {
-            connect: { id: user.id } // Link the folder to the user (author)
+            connect: { id: user.id }
           },
         }
       });
 
-      console.log('File created:', newFile);
       return newFile;
     } catch (error) {
-      console.error('Error inserting file:', error);
       throw error;
     }
   }
@@ -255,8 +244,6 @@ async function getUser(email) {
   }
 
   async function getAllSubFiles(folderId) {
-    // where parentid = parentid
-
 
    const files = await prisma.file.findMany({
      where: {
@@ -287,15 +274,13 @@ async function getUser(email) {
             connect: { id: folderId }
           },
           owner: {
-            connect: { id: user.id } // Link the folder to the author (user who created it)
+            connect: { id: user.id }
           }
         }
       });
 
-      console.log('Successfully created new subfile:', newSubFile);
       return newSubFile;
     } catch (error) {
-      console.error('Error inserting new subfolder:', error);
       throw new Error('Failed to create subfolder');
     }
   }
@@ -329,5 +314,5 @@ async function getUser(email) {
     getAllSubFiles,
     getFile,
     deleteSubFolderFiles
-    // other database functions
+
   };

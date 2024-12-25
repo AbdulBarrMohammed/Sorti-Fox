@@ -122,7 +122,7 @@
     font-size: 1.1rem;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     padding: 10px;
 
 
@@ -136,7 +136,7 @@
     justify-content: center;
     align-items: center;
     padding: 100px 10px;
-    gap: 70px;
+    gap: 20px;
 
 }
 .referrals h2 {
@@ -147,8 +147,9 @@
 
 .refferal-content {
     display: flex;
-    gap: 50px;
+    gap: 20px;
     justify-content: center;
+    text-align: center;
 
 
 }

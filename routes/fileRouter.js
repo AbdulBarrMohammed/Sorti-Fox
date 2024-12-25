@@ -22,7 +22,6 @@ router.post("/library/create/file", upload.single('file'), fileController.create
 router.post("/library/file/delete/:id", fileController.deleteFilePost);
 router.post("/library/file/update/:id", fileController.editFilePost);
 router.get("/library/file/selectedFile", fileController.getSelectedFile);
-//router.post("/library/folder/createSubFolder/:id", folderController.addSubFolderPost)
 
 router.post("/library/file/createSubFile/:id", upload.single('file'), fileController.addSubFilePost)
 router.post("/library/subfile/delete/:id/:folderId", fileController.deleteSubFilePost);

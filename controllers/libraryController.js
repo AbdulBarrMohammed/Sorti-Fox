@@ -3,6 +3,11 @@ const db = require('../db/queries');
 const { formatDistanceToNow }  = require('date-fns');
 
 
+/**
+  * Logs out user
+  * @param request, response
+  * @return none
+  */
 async function logOutGet(req, res){
     req.logout((err) => {
       if (err) {
@@ -14,9 +19,12 @@ async function logOutGet(req, res){
   }
 
 
-
+/**
+  * Displays users current folders and files
+  * @param request, response
+  * @return none
+  */
   async function displayLibrary(req, res) {
-    //const { email }  = req.user;
 
     try {
       const { email } = req.user;
@@ -31,8 +39,6 @@ async function logOutGet(req, res){
 
 
 }
-
-
 
 
   module.exports =  {

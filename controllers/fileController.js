@@ -7,33 +7,35 @@ cloudinary.config({
     cloud_name: 'dzuhra9bj',
     secure: true,
     api_key: '311875277133285',
-    api_secret: 'VNh1gI5JRjLCiG6JXpT7lIIgoKs' // Click 'View API Keys' above to copy your API secret
+    api_secret: 'VNh1gI5JRjLCiG6JXpT7lIIgoKs'
 });
 
 
-//get image from cloudinary
-
+/**
+  * Creates file by storing file into cloudinary
+  * @param request, response, next
+  * @return none
+  */
 async function createFilePost(req, res, next) {
 
 
     try {
-            //res.send('Uploaded Successfully');
         const { email } = req.user;
 
-        const fileType = req.file.mimetype;  // Get the file MIME type
+        const fileType = req.file.mimetype;
 
 
         // Determine resource type based on file MIME type
-        let resourceType = "auto";  // Default to "auto" for dynamic handling
+        let resourceType = "auto";
         if (fileType === "application/pdf") {
-            resourceType = "raw";  // PDFs are treated as raw files
+            resourceType = "raw";
         } else if (fileType.startsWith("image/")) {
-            resourceType = "image";  // Images should use "image" resource type
+            resourceType = "image";
         }
 
+        //Checks if file extension is not supported
         if (fileType == "text/plain") {
 
-            //return res.status(400).json({ error: "Can't accept text files." });
             return res.send(`
                 <script>
                 alert("Can't accept text files.");
@@ -47,8 +49,6 @@ async function createFilePost(req, res, next) {
                 resource_type: resourceType,
 
             })
-            console.log('Cloudinary Upload Result:', results);
-            //const path = results.secure_url;
             const url = results.secure_url;
             let path = url.replace('/upload/', '/upload/pg_1/').replace('.pdf', '.jpg');
 
@@ -65,7 +65,7 @@ async function createFilePost(req, res, next) {
     } catch(err) {
          return res.send(`
         <script>
-          alert("Can't accept text files.");
+          alert("Can't accept this type of file.");
           window.history.back(); // Go back to the previous page
         </script>
       `);
@@ -76,6 +76,12 @@ async function createFilePost(req, res, next) {
 
 }
 
+
+/**
+  * Saves edits made to file
+  * @param request, response
+  * @return none
+  */
 async function editFilePost(req, res) {
     const { newFileName } = req.body;
     await db.updateFile(req.params.id, newFileName);
@@ -84,33 +90,44 @@ async function editFilePost(req, res) {
 
 }
 
+/**
+  * Saves edits made to sub files
+  * @param request, response
+  * @return none
+  */
 async function editSubFilePost(req, res) {
     const { newFileName } = req.body;
     const id = req.params.folderId;
     const subFolder = await db.getFolder(id);
     const parentId = subFolder.id;
-    console.log(`id: ${id}`)
-    console.log(`subfolder: ${subFolder}`)
 
     await db.updateFile(req.params.id, newFileName);
 
     res.redirect(`/library/folder/${parentId}`)
-    //res.redirect('/library')
-
-
 
 }
 
+
+/**
+  * Grabs selected file from database
+  * @param request, response
+  * @return none
+  */
 async function getSelectedFile(req, res) {
     const id = req.params.id;
     const file = await db.getFile(id)
     res.render(`views/selectedFile`, {user: req.user, file: file});
 }
 
+
+/**
+  * Removes file from database
+  * @param request, response
+  * @return none
+  */
 async function deleteFilePost(req, res) {
 
     const id = req.params.id;
-    console.log('delete file confirmed')
     await db.deleteFile(id)
 
     res.redirect("/library")
@@ -118,6 +135,11 @@ async function deleteFilePost(req, res) {
 
 }
 
+/**
+  * Removes sub file from database
+  * @param request, response
+  * @return none
+  */
 async function deleteSubFilePost(req, res) {
     const id = req.params.folderId;
     const subFolder = await db.getFolder(id);
@@ -126,28 +148,32 @@ async function deleteSubFilePost(req, res) {
 
     res.redirect(`/library/folder/${parentId}`)
 
-
 }
 
+/**
+  * Adds sub file to cloudinary
+  * @param request, response, next
+  * @return none
+  */
 async function addSubFilePost(req, res, next) {
 
-    const fileType = req.file.mimetype;  // Get the file MIME type
+    // Gets the file MIME type
+    const fileType = req.file.mimetype;
 
 
-    // Determine resource type based on file MIME type
-    let resourceType = "auto";  // Default to "auto" for dynamic handling
+    // Determines the resource type based on file MIME type
+    let resourceType = "auto";
     if (fileType === "application/pdf") {
-        resourceType = "raw";  // PDFs are treated as raw files
+        resourceType = "raw";
     } else if (fileType.startsWith("image/")) {
-        resourceType = "image";  // Images should use "image" resource type
+        resourceType = "image";
     }
 
     const results = await cloudinary.uploader.upload(req.file.path, {
         resource_type: resourceType,
 
     })
-    console.log('Cloudinary Upload Result:', results);
-    //const path = results.secure_url;
+
     const url = results.secure_url;
     let path = url.replace('/upload/', '/upload/pg_1/').replace('.pdf', '.jpg');
 

@@ -1,5 +1,7 @@
 const express = require("express");
 const session = require("express-session");
+const fs = require("fs");
+const https = require("https");
 const passport = require("passport");
 const path = require("path");
 const authRouter = require("./routes/authRouter");
@@ -18,7 +20,7 @@ const { PrismaClient } = require('@prisma/client');
 app.use(
   expressSession({
     cookie: {
-     maxAge: 7 * 24 * 60 * 60 * 1000 // ms
+     maxAge: 7 * 24 * 60 * 60 * 1000
     },
     secret: 'a santa at nasa',
     resave: true,
@@ -26,7 +28,7 @@ app.use(
     store: new PrismaSessionStore(
       new PrismaClient(),
       {
-        checkPeriod: 2 * 60 * 1000,  //ms
+        checkPeriod: 2 * 60 * 1000,
         dbRecordIdIsSessionId: true,
         dbRecordIdFunction: undefined,
       }
@@ -46,7 +48,17 @@ app.use("/", folderRouter)
 app.use("/", fileRouter);
 
 
+// SSL configuration
+const sslOptions = {
+  key: fs.readFileSync("key.pem"),
+  cert: fs.readFileSync("cert.pem"),
+};
+
+
+https.createServer(sslOptions, app).listen(4005, () => {
+  console.log("App listening on https://localhost:4005");
+});
 module.exports = app;
 
 
-app.listen(4005, () => console.log("app listening on port 6000!"));
+//app.listen(4005, () => console.log("app listening on port 4005!"));

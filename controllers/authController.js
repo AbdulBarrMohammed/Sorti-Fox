@@ -10,6 +10,7 @@ const { body, validationResult } = require("express-validator");
 const passLengthErr =  "must be at least 8 characters.";
 const usernameLengthErr =  "must be at least 5 characters.";
 
+// Validates password when creating account
 const validateUser = [
 
  body("email").trim()
@@ -25,51 +26,49 @@ const validateUser = [
     .withMessage('Password must contain at least one number'),
 ]
 
-//Get
+/**
+  * Displays index page
+  * @param request, response
+  * @return none
+  */
 async function displayIndex(req, res) {
-
-
     res.render("views/index", {user: req.user});
 }
 
+/**
+  * Renders sign up form
+  * @param request, response
+  * @return none
+  */
 async function signUpGet(req, res) {
     res.render("views/forms/signUpForm");
 }
 
+
+/**
+  * Renders login form
+  * @param request, response
+  * @return none
+  */
 async function logInGet(req, res) {
     res.render("views/forms/logInForm");
 }
 
-/*
-async function displayLibrary(req, res) {
-    res.render("views/library", { user: req.user })
-}
- */
-
-
-//Post
-
-/*
-async function logInPost(req, res, next) {
-    passport.authenticate("local", {
-        successRedirect: "/library",
-        failureRedirect: "/"
-      })(req, res, next);
-}*/
-
+/**
+  * Authenitcates user log in
+  * @param request, response, next
+  * @return none
+  */
 async function logInPost(req, res, next) {
     passport.authenticate('local', (err, user, info) => {
       if (err) {
-        console.error('Authentication error:', err);
         return next(err);
       }
       if (!user) {
-        console.log('Authentication failed:', info.message);
-        return res.redirect('/'); // Redirect to the login page or display an error
+        return res.redirect('/');
       }
       req.logIn(user, (err) => {
         if (err) {
-          console.error('Error logging in user:', err);
           return next(err);
         }
         return res.redirect('/library');
@@ -83,40 +82,38 @@ const signUpPost = [
      async (req, res, next) => {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        console.log("ERRRORRRR")
         return res.status(400).render("views/signUpForm", {
           title: "Sign Up",
           errors: errors.array(),
         });
       }
       const { email, password  } = req.body;
-      console.log(email, password)
 
       try {
-        // Hash the password with bcrypt
+        // Hashes the password with bcrypt
         bcrypt.hash(password, 10, async (err, hashedPassword) => {
-          console.log(hashedPassword)
           if (err) {
-            // Handle hashing error
+            // Handles hashing error
             return next(err);
           }
 
-          // Store hashedPassword in DB
+          // Stores hashedPassword in DB
           try {
-              console.log(email);
               await db.insertNewUsers({email, hashedPassword});
 
-            console.log('User signed up successfully');
 
-            res.redirect("/");
+            res.redirect("/log-in");
           } catch (dbError) {
-            // Handle database insertion error
+            // Handles database insertion error
+            res.redirect("/");
             return next(dbError);
           }
         });
       } catch (err) {
         // Handle other errors
+        res.redirect("/");
         return next(err);
+
       }
   }
 
@@ -128,23 +125,20 @@ passport.use(
         async (email, password, done) => {
       try {
         const user = await db.getUser(email);
-        console.log(user);
 
 
         if (!user) {
-            console.log("wrong email")
+
           return done(null, false, { message: "Incorrect email" });
         }
         const match = await bcrypt.compare(password, user.password);
         if (!match) {
-        // passwords do not match!
-        console.log("wrong password")
+        // Passwords do not match!
         return done(null, false, { message: "Incorrect password" })
 
         }
         return done(null, user);
       } catch(err) {
-        console.log("just err")
         return done(err);
       }
     })
@@ -158,24 +152,12 @@ passport.serializeUser((user, done) => {
 passport.deserializeUser(async (id, done) => {
     try {
       const user = await db.getUserById(id);
-
       done(null, user);
     } catch(err) {
-        console.log("deserial err")
       done(err);
     }
   });
 
-  /*
-  async function logOutGet(req, res){
-    req.logout((err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/");
-    });
-
-  } */
 
 
 
@@ -183,9 +165,8 @@ module.exports =  {
 
     displayIndex,
     signUpGet,
-    logInGet,
-
     signUpPost,
+    logInGet,
     logInPost
 
 

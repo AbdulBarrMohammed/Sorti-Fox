@@ -8,11 +8,6 @@ const router = Router();
 router.get("/library", libraryController.displayLibrary)
 router.get("/log-out", libraryController.logOutGet);
 
-//Post
-
-
-
-
 
 
 module.exports = router;

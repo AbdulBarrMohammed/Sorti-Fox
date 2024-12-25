@@ -276,13 +276,13 @@
                     top = buttonRect.top + window.scrollY - modalRect.height;
                 }
 
-                // Adjust if modal goes off the side of the screen
+                // Adjusts if modal goes off the side of the screen
                 if (left + modalRect.width > viewportWidth + window.scrollX) {
-                    // If the modal will go off the right side, shift it to the left
+                    // If the modal will go off the right side it will shift it to the left
                     left = buttonRect.right + window.scrollX - modalRect.width;
                 }
 
-                // Set the modal's position relative to the button
+                // Sets the modal's position relative to the button
                 optionsModal.style.position = 'absolute';
                 optionsModal.style.left = `${left}px`;
                 optionsModal.style.top = `${top}px`;
@@ -292,28 +292,28 @@
                 currentModal = optionsModal;
                 });
 
-                // Close the options modal when the 'X' is clicked
+                // Closes the options modal when the 'X' button is clicked
                 optionsCloseBtn.onclick = function() {
                     optionsModal.style.display = 'none';
                     currentModal = null;
                 };
             });
 
-            // Handle options modal for each file
+            // Handles options modal for each file
             document.querySelectorAll('.options-file-btn').forEach(button => {
                 const fileId = button.getAttribute('data-file-id');
                 const optionsFileModal = document.getElementById(`optionsFileModal${fileId}`);
                 const optionsFileCloseBtn = optionsFileModal.querySelector('.close');
 
-                // Get the position of the clicked button
+                // Gets the position of the clicked button
                 const buttonRect = button.getBoundingClientRect();
                 const modalRect = optionsFileModal.getBoundingClientRect();
 
-                // Calculate the desired position
+                // Calculates the desired position
                 let top = buttonRect.bottom + window.scrollY;
                 let left = buttonRect.left + window.scrollX;
 
-                // Adjust if modal goes off the bottom of the viewport
+                // Adjusts if modal goes off the bottom of the viewport
                 const viewportHeight = window.innerHeight;
                 const viewportWidth = window.innerWidth;
 
@@ -322,35 +322,37 @@
                     top = buttonRect.top + window.scrollY - modalRect.height;
                 }
 
-                // Adjust if modal goes off the side of the screen
+                // Adjusts if modal goes off the side of the screen
                 if (left + modalRect.width > viewportWidth + window.scrollX) {
-                    // If the modal will go off the right side, shift it to the left
+                    // If the modal will go off the right side it will shift it to the left
                     left = buttonRect.right + window.scrollX - modalRect.width;
                 }
 
-                // Set the modal's position relative to the button
+                // Sets the modal's position relative to the button
                 optionsFileModal.style.position = 'absolute';
                 optionsFileModal.style.left = `${left}px`;
                 optionsFileModal.style.top = `${top}px`;
 
-                // Open the options modal when the button is clicked
+                // Opens the options modal when the button is clicked
                 button.addEventListener('click', () => {
-                    closeCurrentModal(); // Close any currently open modal
+                    closeCurrentModal(); // Closes any currently open modal
                     optionsFileModal.style.display = 'block';
                     currentModal = optionsFileModal;
                 });
 
-                // Close the options modal when the 'X' is clicked
+                // Closes the options modal when the 'X' is clicked
                 optionsFileCloseBtn.onclick = function() {
                     optionsFileModal.style.display = 'none';
                     currentModal = null;
                 };
             });
 
+
+            //Opens edit modal and gets current folder id
             window.openEditModal = function(folderId) {
                 const optionsModal = document.getElementById(`optionsModal${folderId}`);
                 const modal = document.getElementById(`editFolderModal${folderId}`);
-                closeCurrentModal(); // Close any currently open modal
+                closeCurrentModal(); // Closes any currently open modal
                 modal.style.display = 'block';
                 optionsModal.style.display = 'none';
                 currentModal = modal;
@@ -377,7 +379,7 @@
                 };
             }
 
-            // Close modals when clicking outside of them
+            // Closes modals when clicking outside of them
             window.onclick = function(event) {
                 if (event.target == newFolderModal) {
                     newFolderModal.style.display = "none";

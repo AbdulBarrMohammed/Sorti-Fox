@@ -1,35 +1,36 @@
 const db = require("../db/queries");
 const { formatDistanceToNow }  = require('date-fns');
 
-// ADD, DELETE, EDIT FOLDER
-async function createFolderGet(req ,res) {
 
-    //res.render("views/library");
-
-
-}
-
+/**
+  * Creates new folder
+  * @param request, response
+  * @return none
+  */
 async function createFolderPost(req, res) {
-    //get email for current logged in user
+    //Gets email for current logged in user
     const { email } = req.user;
     const { folderName } = req.body;
     const createdAt = new Date();
 
-
-    //insert new folder
+    //Inserts new folder
     await db.insertNewFolder({ email, folderName, createdAt })
 
     res.redirect("/library")
 
-    //
 
 }
 
+
+/**
+  * Removes folder from database
+  * @param request, response
+  * @return none
+  */
 async function deleteFolderPost(req, res) {
-    //const { email } = req.user;
     const id = req.params.id;
 
-    //delete the parent folders files first;
+    //Delete the parent folders files first;
     await db.deleteSubFolderFiles(id);
     await db.deleteFolder(id)
 
@@ -38,6 +39,11 @@ async function deleteFolderPost(req, res) {
 
 }
 
+/**
+  * Edits changes made to folder
+  * @param request, response
+  * @return none
+  */
 async function editFolderPost(req, res) {
     const {newFolderName} = req.body;
     await db.updateFolder(req.params.id, newFolderName);
@@ -46,6 +52,11 @@ async function editFolderPost(req, res) {
 
 }
 
+/**
+  * Grabs folder from database and displays it to user
+  * @param request, response
+  * @return none
+  */
 async function getSelectedFolder(req, res) {
     const id = req.params.id;
     const folder = await db.getFolder(id);
@@ -55,8 +66,14 @@ async function getSelectedFolder(req, res) {
     res.render(`views/selectedFolder`, {user: req.user, folder: folder, formatDistanceToNow: formatDistanceToNow, subFolders: subFolders, subFiles: subFiles});
 }
 
+
+/**
+  * Adds sub folder to database
+  * @param request, response
+  * @return none
+  */
 async function addSubFolderPost(req, res) {
-    //get parent id from current folder;
+    //Gets parent id from current folder;
     const { email } = req.user;
     const parentId = req.params.id;
     const { subFolderName } = req.body;
@@ -68,43 +85,44 @@ async function addSubFolderPost(req, res) {
 
 }
 
+/**
+  * Deletes sub folder from database
+  * @param request, response
+  * @return none
+  */
 async function deleteSubFolderPost(req, res) {
     const id = req.params.id;
     const subFolder = await db.getFolder(id);
     const parentId = subFolder.parentId
 
-    //first delete all files of the folder
+    //First deletes all files of the folder
     await db.deleteSubFolderFiles(id);
     await db.deleteFolder(id)
 
     res.redirect(`/library/folder/${parentId}`)
 }
 
+/**
+  * Edits changes made to sub folder
+  * @param request, response
+  * @return none
+  */
 async function editSubFolderPost(req, res) {
 
     const id = req.params.id;
     const subFolder = await db.getFolder(id);
-
-
-   const parentId = subFolder.parentId;
-
+    const parentId = subFolder.parentId;
 
     const {newSubFolderName} = req.body;
     await db.updateFolder(req.params.id, newSubFolderName);
 
     res.redirect(`/library/folder/${parentId}`)
 
-
-
 }
 
 
 
-
-
 module.exports =  {
-
-    createFolderGet,
     createFolderPost,
     deleteFolderPost,
     editFolderPost,
@@ -112,6 +130,5 @@ module.exports =  {
     addSubFolderPost,
     deleteSubFolderPost,
     editSubFolderPost
-
 
   }
