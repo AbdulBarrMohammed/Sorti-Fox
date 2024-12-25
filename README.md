@@ -40,15 +40,23 @@ Here's a walkthrough of implemented user stories:
 
 ## Image Walkthrough
 
-Home page layout
+Home page layout:
 
 <img width="1000" alt="Screenshot 2024-12-25 at 3 25 10 PM" src="https://github.com/user-attachments/assets/160b17a9-1a97-4c47-908f-f389f64c1571" />
 
-Log in and sign up page
+
+Log in and sign up page:
 
 <img width="1439" alt="Screenshot 2024-12-25 at 12 06 11 PM" src="https://github.com/user-attachments/assets/861c753c-185d-4415-ba62-dd8fe167b406" />
 
 <img width="1440" alt="Screenshot 2024-12-25 at 12 06 04 PM" src="https://github.com/user-attachments/assets/0bf74af4-26e8-439c-8fdc-34928117c863" />
+
+
+Files and Folders layout:
+
+<img width="1440" alt="Screenshot 2024-12-25 at 12 04 32 PM" src="https://github.com/user-attachments/assets/963f9b43-3fce-45aa-a7bf-8f84769afba5" />
+
+
 
 
 
