@@ -19,7 +19,8 @@
     "date-fns": "^3.6.0",
     "express": "^4.21.2",
     "express-session": "^1.18.0",
-    "multer": "^1.4.5-lts.1"
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.7.0"
   },
   "devDependencies": {
     "@types/node": "^22.5.4",
@@ -31,5 +32,4 @@
   "engines": {
     "node": "20.x"
   }
-
 }
