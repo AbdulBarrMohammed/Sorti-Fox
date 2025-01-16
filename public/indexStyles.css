@@ -247,6 +247,7 @@ footer {
     flex-direction: column;
 
 
+
 }
 
 .footer-bottom-links {
@@ -271,6 +272,7 @@ footer {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+    font-size: 18px;
     gap: 100px;
 
     padding: 100px 0;
